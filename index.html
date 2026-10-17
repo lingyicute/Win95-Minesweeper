@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="en" data-language="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="A standalone Windows 95-style Minesweeper game by lingyicute.">
+<title>Minesweeper — lingyicute</title>
+<style>
+@font-face {
+  font-family: 'W95FA';
+  src: url(data:font/woff2;base64,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) format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'WenQuanYi Bitmap Song 12px';
+  src: url("data:font/woff2;base64,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") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+:root {
+  color-scheme: light;
+  --desktop: #008080;
+  --face: #c0c0c0;
+  --white: #fff;
+  --shadow: #808080;
+  --dark: #000;
+  --title: #000080;
+  --raised: inset -1px -1px #000, inset 1px 1px #fff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+  --sunken: inset -1px -1px #fff, inset 1px 1px #808080, inset -2px -2px #dfdfdf, inset 2px 2px #000;
+  font-family: W95FA, 'WenQuanYi Bitmap Song 12px', Arial, sans-serif;
+  font-size: 12px;
+}
+html[data-language="zh"] { font-family: 'WenQuanYi Bitmap Song 12px', W95FA, Arial, sans-serif; }
+* { box-sizing: border-box; touch-action: manipulation; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+body { background: var(--desktop); color: #000; line-height: 1.25; user-select: none; -webkit-font-smoothing: none; }
+button, input { font: inherit; color: inherit; border-radius: 0; }
+button { border: 0; background: var(--face); box-shadow: var(--raised); min-height: 23px; padding: 4px 12px; cursor: default; }
+button:active:not(:disabled) { box-shadow: var(--sunken); }
+button:focus-visible, input:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+button:disabled { color: #808080; text-shadow: 1px 1px #fff; }
+input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; min-width: 0; }
+[hidden] { display: none !important; }
+#desktop { position: fixed; inset: 0; overflow: hidden; background: var(--desktop); }
+.window {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 212px;
+  height: 298px;
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--raised);
+  overflow: visible;
+  max-width: none;
+  max-height: none;
+}
+.title-bar {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 19px;
+  min-height: 19px;
+  padding: 2px 2px 2px 1px;
+  background: #808080;
+  color: #c0c0c0;
+  touch-action: none;
+  cursor: move;
+}
+.window.active > .title-bar { background: var(--title); color: #fff; }
+.title-icon { width: 16px; height: 16px; flex: none; image-rendering: pixelated; }
+.title-text { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-weight: bold; letter-spacing: .1px; }
+.menu-bar { display: flex; align-items: center; height: 22px; min-height: 22px; padding: 1px 0; }
+.menu-bar > button { height: 19px; min-height: 19px; padding: 2px 7px; background: none; box-shadow: none; }
+.menu-bar > button:hover, .menu-bar > button[aria-expanded="true"] { box-shadow: var(--raised); }
+.window-body { flex: 1; min-width: 0; min-height: 0; padding: 7px; overflow: visible; }
+.mines-frame { display: inline-block; padding: 7px; border: 3px solid; border-color: #fff #808080 #808080 #fff; }
+.mines-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 7px;
+  padding: 5px 7px;
+  box-shadow: inset 2px 2px #808080, inset -2px -2px #fff;
+}
+.mines-counter {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 43px;
+  height: 28px;
+  padding: 1px;
+  border: 1px solid;
+  border-color: #808080 #fff #fff #808080;
+  background: #000;
+}
+.mines-digit { display: block; position: relative; width: 12px; height: 22px; }
+.mines-segment { position: absolute; display: block; background: #310000; }
+.mines-segment.is-lit { background: #f00; }
+.mines-segment-a, .mines-segment-d, .mines-segment-g {
+  left: 2px; width: 8px; height: 3px;
+  clip-path: polygon(0 50%, 20% 0, 80% 0, 100% 50%, 80% 100%, 20% 100%);
+}
+.mines-segment-a { top: 0; }
+.mines-segment-d { bottom: 0; }
+.mines-segment-g { top: 10px; }
+.mines-segment-b, .mines-segment-c, .mines-segment-e, .mines-segment-f {
+  width: 3px; height: 9px;
+  clip-path: polygon(50% 0, 100% 20%, 100% 80%, 50% 100%, 0 80%, 0 20%);
+}
+.mines-segment-b { top: 2px; right: 0; }
+.mines-segment-c { right: 0; bottom: 2px; }
+.mines-segment-e { left: 0; bottom: 2px; }
+.mines-segment-f { top: 2px; left: 0; }
+.face-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  min-height: 27px;
+  padding: 0 !important;
+  color: #000;
+}
+.face-button svg { display: block; width: 20px; height: 20px; }
+.mines-board {
+  display: grid;
+  width: max-content;
+  border: 3px solid;
+  border-color: #808080 #fff #fff #808080;
+  gap: 0;
+}
+.mine-cell {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+  padding: 0 !important;
+  font: bold 16px Arial, sans-serif;
+  line-height: 20px;
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #808080, inset 2px 2px #dfdfdf;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.mine-cell.revealed { box-shadow: none; border-top: 1px solid #808080; border-left: 1px solid #808080; font-weight: bold; }
+.mine-cell.exploded { background: #f00; }
+.mine-cell.n1 { color: #00f; }
+.mine-cell.n2 { color: #008000; }
+.mine-cell.n3 { color: #f00; }
+.mine-cell.n4 { color: #000080; }
+.mine-cell.n5 { color: #800000; }
+.mine-cell.n6 { color: #008080; }
+.mine-cell.n7 { color: #000; }
+.mine-cell.n8 { color: #808080; }
+.mines-mark { display: block; width: 16px; height: 16px; margin: auto; }
+.mines-wrong-mark {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  color: #f00;
+  font: bold 26px Arial, sans-serif;
+  line-height: 20px;
+  text-align: center;
+  pointer-events: none;
+}
+#popup-layer { position: fixed; inset: 0; z-index: 50; pointer-events: none; }
+.popup-menu {
+  position: absolute;
+  min-width: 198px;
+  max-height: calc(100vh - 12px);
+  overflow: auto;
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--raised);
+  pointer-events: auto;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 21px;
+  padding: 3px 9px 3px 2px;
+  background: none;
+  box-shadow: none;
+  text-align: left;
+  white-space: nowrap;
+}
+.menu-item:hover, .menu-item:focus-visible { background: #000080; color: #fff; outline: none; }
+.menu-check { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 18px; font-weight: bold; }
+.menu-label { flex: 1; }
+.menu-shortcut { margin-left: 18px; }
+.menu-separator { height: 2px; margin: 3px 2px; background: #808080; border-bottom: 1px solid #fff; }
+#dialog-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: rgba(0, 0, 0, .12);
+}
+.dialog-window {
+  display: flex;
+  flex-direction: column;
+  width: min(360px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  padding: 3px;
+  background: var(--face);
+  box-shadow: var(--raised);
+}
+.dialog-title { height: 19px; min-height: 19px; padding: 2px 4px; background: var(--title); color: #fff; font-weight: bold; }
+.dialog-body { min-height: 0; padding: 15px 13px 12px; line-height: 1.5; }
+.about-brand { display: flex; align-items: center; gap: 14px; min-height: 58px; }
+.about-icon { display: flex; align-items: center; justify-content: center; flex: none; width: 48px; height: 48px; }
+.about-name { margin-bottom: 4px; font-size: 18px; font-weight: bold; }
+.about-byline { font-size: 13px; }
+.dialog-buttons { display: flex; justify-content: flex-end; gap: 6px; padding: 0 12px 11px; }
+.dialog-buttons > button { min-width: 76px; }
+.default-button { outline: 1px solid #000; outline-offset: -2px; }
+.dialog-copy { margin: 0; white-space: pre-line; }
+.form-grid { display: grid; grid-template-columns: 1fr 92px; align-items: center; gap: 8px 12px; }
+.form-grid label { white-space: nowrap; }
+.form-grid input { width: 100%; height: 25px; }
+.form-error { min-height: 18px; margin-top: 8px; color: #900; }
+@media (max-width: 520px) {
+  .dialog-body { padding: 12px 9px 9px; }
+  .about-brand { gap: 9px; }
+  .about-byline { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<div id="desktop" role="application" aria-label="Minesweeper desktop">
+  <section id="game-window" class="window active" aria-label="Minesweeper window">
+    <header id="title-bar" class="title-bar">
+      <img class="title-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA7klEQVR4AZXBgW3YMBAEwaXivvSdcdXZsTJGBBhYBiwbmeEn6uQXf3ihzt47rTWTXLw4+E/q5OFgU6c6+YE6q4rbZGvc1FlVnOfJdV0svXfGGCxJWKqKqmJr3BqbOquK8zxZxhgsSagqkqCyNbaDTW1JWMYYLEmoKpLw0Hho6mTrvTPGYDnPkzEGVYWKyjfaB7feO8sYgyUJSxIWlSeVReWD23VdPFUVVcUblX8aD+qsKpKwqHyj8XDwUFUkYVF5MXlobElmElTeqKhsjdvBLclMgsrWuKlsDWgqKm8mMPk01QlMvpo8NN5NPjVe/AVhKIOZ8WTC+wAAAABJRU5ErkJggg==" alt="" aria-hidden="true">
+      <span class="title-text">Minesweeper</span>
+    </header>
+    <nav class="menu-bar" aria-label="Minesweeper menus">
+      <button type="button" data-menu="game" aria-haspopup="menu" aria-expanded="false">Game</button>
+      <button type="button" data-menu="language" aria-haspopup="menu" aria-expanded="false">Language</button>
+      <button type="button" data-menu="help" aria-haspopup="menu" aria-expanded="false">Help</button>
+    </nav>
+    <div class="window-body">
+      <div class="mines-frame">
+        <div class="mines-header">
+          <div id="mine-counter" class="mines-counter" role="img" aria-label="010"></div>
+          <button id="new-game" class="face-button" type="button" aria-label="New game" title="New game (F2)"></button>
+          <div id="time-counter" class="mines-counter" role="img" aria-label="000"></div>
+        </div>
+        <div id="board" class="mines-board" role="grid" aria-label="Minesweeper board"></div>
+      </div>
+    </div>
+  </section>
+  <div id="popup-layer" hidden></div>
+  <div id="dialog-layer" hidden></div>
+</div>
+<script>
+(() => {
+  'use strict';
+
+  const SEGMENTS = [...'abcdefg'];
+  const DIGIT_SEGMENTS = ['abcdef', 'bc', 'abdeg', 'abcdg', 'bcfg', 'acdfg', 'acdefg', 'abc', 'abcdefg', 'abcdfg'];
+  const MINE_MARKUP = '<svg class="mines-mark" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><g stroke="#000"><path d="M7 0V14M0 7H14M2 2L12 12M12 2L2 12"/><circle cx="7" cy="7" r="4" fill="#000"/></g><rect x="5" y="4" width="2" height="2" fill="#fff"/></svg>';
+  const FLAG_MARKUP = '<svg class="mines-mark" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M7 2L2 5L7 7Z" fill="red"/><path d="M7 2V11H4V12H11V11H8V2Z" fill="#000"/></svg>';
+  const WRONG_FLAG_MARKUP = MINE_MARKUP + '<span class="mines-wrong-mark" aria-hidden="true">×</span>';
+  const EYES = {
+    smile: '<path d="M7 5V7M13 5V7" stroke-width="2"/>',
+    pressed: '<path d="M7 5V7M13 5V7" stroke-width="2"/>',
+    lost: '<path d="M5 5L8 8M8 5L5 8M12 5L15 8M15 5L12 8"/>',
+    won: '<path d="M3 5H17M4 6L5 9H8L9 6M11 6L12 9H15L16 6" fill="#000"/>'
+  };
+  const MOUTHS = {
+    smile: '<path d="M5 11Q10 18 15 11"/>',
+    pressed: '<ellipse cx="10" cy="13" rx="2" ry="3" fill="#000"/>',
+    lost: '<path d="M5 15Q10 9 15 15"/>',
+    won: '<path d="M5 11Q10 18 15 11"/>'
+  };
+
+  const desktop = document.querySelector('#desktop');
+  const gameWindow = document.querySelector('#game-window');
+  const titleBar = document.querySelector('#title-bar');
+  const board = document.querySelector('#board');
+  const mineCounter = document.querySelector('#mine-counter');
+  const timeCounter = document.querySelector('#time-counter');
+  const faceButton = document.querySelector('#new-game');
+  const popupLayer = document.querySelector('#popup-layer');
+  const dialogLayer = document.querySelector('#dialog-layer');
+  const menuButtons = [...document.querySelectorAll('[data-menu]')];
+  const titleText = document.querySelector('.title-text');
+  const menuBar = document.querySelector('.menu-bar');
+  let language = 'en';
+  const UI_TEXT = {
+    en: {
+      pageTitle: 'Minesweeper — lingyicute',
+      description: 'A standalone Windows 95-style Minesweeper game by lingyicute.',
+      title: 'Minesweeper', desktop: 'Minesweeper desktop', window: 'Minesweeper window',
+      menus: 'Minesweeper menus', board: 'Minesweeper board',
+      game: 'Game', language: 'Language', help: 'Help',
+      new: 'New', beginner: 'Beginner', intermediate: 'Intermediate', expert: 'Expert',
+      custom: 'Custom…', bestTimes: 'Best Times…', bestTimesTitle: 'Best Times',
+      howToPlay: 'How to Play', about: 'About Minesweeper',
+      ok: 'OK', cancel: 'Cancel', newGame: 'New game', newGameTitle: 'New game (F2)',
+      rows: 'Rows', columns: 'Columns', mines: 'Mines', colon: ':',
+      customField: 'Custom Field',
+      invalidCustom: 'Use 8–24 rows, 8–30 columns, and fewer mines than squares.',
+      seconds: 'seconds', flagged: 'flagged', mine: 'mine', covered: 'covered',
+      adjacentMineSingular: 'adjacent mine', adjacentMinePlural: 'adjacent mines',
+      helpText: 'Reveal every safe square without hitting a mine.\n\nClick or tap a covered square to reveal it. Right-click, or press and hold on touch, to place or remove a flag. Numbers count the mines in the eight surrounding squares.\n\nDouble-click or double-tap a number after flagging all adjacent mines to reveal its neighbors. You can also use the middle mouse button.'
+    },
+    zh: {
+      pageTitle: '扫雷 — lingyicute',
+      description: 'lingyicute 制作的独立 Windows 95 风格扫雷游戏。',
+      title: '扫雷', desktop: '扫雷桌面', window: '扫雷窗口',
+      menus: '扫雷菜单', board: '扫雷棋盘',
+      game: '游戏', language: '语言', help: '帮助',
+      new: '新建', beginner: '初级', intermediate: '中级', expert: '高级',
+      custom: '自定义…', bestTimes: '最佳时间…', bestTimesTitle: '最佳时间',
+      howToPlay: '游戏说明', about: '关于扫雷',
+      ok: '确定', cancel: '取消', newGame: '新游戏', newGameTitle: '新游戏 (F2)',
+      rows: '行数', columns: '列数', mines: '雷数', colon: '：',
+      customField: '自定义雷区',
+      invalidCustom: '行数须为 8–24，列数须为 8–30，雷数须少于格子总数。',
+      seconds: '秒', flagged: '已插旗', mine: '地雷', covered: '未翻开',
+      adjacentMineSingular: '个相邻地雷', adjacentMinePlural: '个相邻地雷',
+      helpText: '翻开所有安全方格，避开地雷即可获胜。\n\n单击或轻触未翻开的方格即可翻开。右键单击，或在触屏上长按方格，即可插旗或移除旗帜。数字表示周围八个方格中的地雷数量。\n\n标记出周围的所有地雷后，双击数字（或点击鼠标中键）即可快速翻开其余相邻的方格。'
+    }
+  };
+  const t = key => UI_TEXT[language][key] ?? UI_TEXT.en[key] ?? key;
+
+  function counterChars(value) {
+    const count = Number.isFinite(value) ? Math.trunc(value) : 0;
+    if (count < 0) return `-${String(Math.min(99, -count)).padStart(2, '0')}`;
+    return String(Math.min(999, count)).padStart(3, '0');
+  }
+  function litSegments(char) {
+    return char === '-' ? ['g'] : [...(DIGIT_SEGMENTS[Number(char)] || '')];
+  }
+  function counterMarkup(value) {
+    return [...counterChars(value)].map(char => {
+      const lit = litSegments(char);
+      return `<span class="mines-digit">${SEGMENTS.map(segment => `<i class="mines-segment mines-segment-${segment}${lit.includes(segment) ? ' is-lit' : ''}"></i>`).join('')}</span>`;
+    }).join('');
+  }
+  function faceMarkup(state) {
+    const face = ['smile', 'pressed', 'lost', 'won'].includes(state) ? state : 'smile';
+    return `<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="#ff0" stroke="#000"/><g fill="none" stroke="#000" stroke-width="1.2">${EYES[face]}${MOUTHS[face]}</g></svg>`;
+  }
+  function cellMarkup(cell, wrong) {
+    if (cell.flagged) return wrong ? WRONG_FLAG_MARKUP : FLAG_MARKUP;
+    if (cell.revealed && cell.mine) return MINE_MARKUP;
+    if (cell.revealed && cell.adjacent > 0) return String(cell.adjacent);
+    return '';
+  }
+  function cellClass(cell, exploded, wrong) {
+    const open = wrong || (cell.revealed && !cell.flagged);
+    return (open ? ' revealed' : '')
+      + (open && !wrong && cell.adjacent ? ` n${cell.adjacent}` : '')
+      + (exploded ? ' exploded' : '')
+      + (wrong ? ' wrong' : '');
+  }
+
+  function shuffle(items, rng) {
+    for (let index = items.length - 1; index > 0; index--) {
+      const other = Math.floor(rng() * (index + 1));
+      [items[index], items[other]] = [items[other], items[index]];
+    }
+    return items;
+  }
+  class Minesweeper {
+    constructor(rows = 8, cols = 8, mines = 10, rng = Math.random) {
+      if (!Number.isInteger(rows) || !Number.isInteger(cols) || rows < 1 || cols < 1) throw new RangeError('Rows and columns must be positive integers.');
+      if (!Number.isInteger(mines) || mines < 0 || mines >= rows * cols) throw new RangeError('Mine count must be between zero and board size minus one.');
+      this.rows = rows;
+      this.cols = cols;
+      this.mines = mines;
+      this.rng = rng;
+      this.reset();
+    }
+    reset() {
+      this.cells = Array.from({ length: this.rows * this.cols }, () => ({ mine: false, revealed: false, flagged: false, adjacent: 0 }));
+      this.state = 'ready';
+      this.flags = 0;
+      this.revealedCount = 0;
+      this.exploded = -1;
+      return this;
+    }
+    get remainingMines() { return this.mines - this.flags; }
+    valid(index) { return Number.isInteger(index) && index >= 0 && index < this.cells.length; }
+    neighbors(index) {
+      if (!this.valid(index)) return [];
+      const row = Math.floor(index / this.cols), col = index % this.cols, result = [];
+      for (let y = Math.max(0, row - 1); y <= Math.min(this.rows - 1, row + 1); y++) {
+        for (let x = Math.max(0, col - 1); x <= Math.min(this.cols - 1, col + 1); x++) {
+          const neighbor = y * this.cols + x;
+          if (neighbor !== index) result.push(neighbor);
+        }
+      }
+      return result;
+    }
+    placeMines(first) {
+      let excluded = new Set([first, ...this.neighbors(first)]);
+      if (this.cells.length - excluded.size < this.mines) excluded = new Set([first]);
+      const candidates = [];
+      for (let index = 0; index < this.cells.length; index++) if (!excluded.has(index)) candidates.push(index);
+      shuffle(candidates, this.rng);
+      for (let index = 0; index < this.mines; index++) this.cells[candidates[index]].mine = true;
+      for (let index = 0; index < this.cells.length; index++) {
+        if (this.cells[index].mine) for (const neighbor of this.neighbors(index)) this.cells[neighbor].adjacent++;
+      }
+      this.state = 'playing';
+    }
+    open(index) {
+      const initial = this.cells[index];
+      if (initial.revealed || initial.flagged) return false;
+      if (initial.mine) {
+        this.exploded = index;
+        this.state = 'lost';
+        for (const cell of this.cells) if (cell.mine) cell.revealed = true;
+        return true;
+      }
+      const queue = [index];
+      initial.revealed = true;
+      this.revealedCount++;
+      for (let cursor = 0; cursor < queue.length; cursor++) {
+        const current = queue[cursor];
+        if (this.cells[current].adjacent) continue;
+        for (const neighbor of this.neighbors(current)) {
+          const cell = this.cells[neighbor];
+          if (!cell.mine && !cell.revealed && !cell.flagged) {
+            cell.revealed = true;
+            this.revealedCount++;
+            if (cell.adjacent === 0) queue.push(neighbor);
+          }
+        }
+      }
+      return true;
+    }
+    checkWin() {
+      if (this.state === 'playing' && this.revealedCount === this.cells.length - this.mines) {
+        this.state = 'won';
+        for (const cell of this.cells) if (cell.mine) cell.flagged = true;
+        this.flags = this.mines;
+      }
+    }
+    reveal(index) {
+      if (!this.valid(index) || this.state === 'won' || this.state === 'lost') return false;
+      if (this.cells[index].flagged || this.cells[index].revealed) return false;
+      if (this.state === 'ready') this.placeMines(index);
+      const changed = this.open(index);
+      this.checkWin();
+      return changed;
+    }
+    flag(index) {
+      if (!this.valid(index) || this.state === 'won' || this.state === 'lost') return false;
+      const cell = this.cells[index];
+      if (cell.revealed) return false;
+      cell.flagged = !cell.flagged;
+      this.flags += cell.flagged ? 1 : -1;
+      return true;
+    }
+    chord(index) {
+      if (!this.valid(index) || this.state !== 'playing') return false;
+      const cell = this.cells[index];
+      if (!cell.revealed || cell.mine) return false;
+      const around = this.neighbors(index);
+      if (around.filter(neighbor => this.cells[neighbor].flagged).length !== cell.adjacent) return false;
+      let changed = false;
+      for (const neighbor of around) {
+        changed = this.open(neighbor) || changed;
+        if (this.state === 'lost') break;
+      }
+      this.checkWin();
+      return changed;
+    }
+  }
+
+  function createTouchFlagHandler(onFlag, delay = 500) {
+    const moveTolerance = 10, suppression = 1000;
+    let activePress = null, ignoreContextMenuUntil = 0, suppressedClick = null;
+    const clearTimer = press => {
+      if (press && press.timer !== null) { clearTimeout(press.timer); press.timer = null; }
+    };
+    const cancelPress = () => { clearTimer(activePress); activePress = null; };
+    const flagPress = press => {
+      if (activePress !== press || press.handled || press.cancelled) return false;
+      press.handled = true;
+      clearTimer(press);
+      const timestamp = Date.now();
+      ignoreContextMenuUntil = timestamp + suppression;
+      suppressedClick = { index: press.index, until: timestamp + suppression };
+      onFlag(press.index);
+      return true;
+    };
+    return {
+      pointerDown(index, event) {
+        if (event.isPrimary === false) return;
+        cancelPress();
+        ignoreContextMenuUntil = 0;
+        suppressedClick = null;
+        if (event.pointerType !== 'touch' || event.button !== 0) return;
+        const press = {
+          index, pointerId: event.pointerId,
+          x: Number.isFinite(event.clientX) ? event.clientX : null,
+          y: Number.isFinite(event.clientY) ? event.clientY : null,
+          handled: false, cancelled: false, timer: null,
+        };
+        activePress = press;
+        press.timer = setTimeout(() => {
+          press.timer = null;
+          if (activePress === press && !press.cancelled) flagPress(press);
+        }, delay);
+      },
+      pointerMove(event) {
+        const press = activePress;
+        if (!press || press.handled || press.cancelled) return;
+        if (event.pointerId !== undefined && press.pointerId !== undefined && event.pointerId !== press.pointerId) return;
+        if (press.x === null || press.y === null || !Number.isFinite(event.clientX) || !Number.isFinite(event.clientY)) return;
+        if (Math.abs(event.clientX - press.x) > moveTolerance || Math.abs(event.clientY - press.y) > moveTolerance) {
+          press.cancelled = true;
+          clearTimer(press);
+        }
+      },
+      pointerEnd(pointerId) {
+        if (!activePress) return;
+        if (pointerId !== undefined && activePress.pointerId !== undefined && pointerId !== activePress.pointerId) return;
+        cancelPress();
+      },
+      contextMenu() {
+        const timestamp = Date.now();
+        if (activePress) {
+          if (!activePress.cancelled) flagPress(activePress);
+          ignoreContextMenuUntil = Math.max(ignoreContextMenuUntil, timestamp + suppression);
+          return true;
+        }
+        if (timestamp < ignoreContextMenuUntil) { ignoreContextMenuUntil = 0; return true; }
+        return false;
+      },
+      consumeClick(index) {
+        if (!suppressedClick) return false;
+        if (Date.now() >= suppressedClick.until) { suppressedClick = null; return false; }
+        if (suppressedClick.index !== index) return false;
+        suppressedClick = null;
+        return true;
+      },
+      cancel() { cancelPress(); ignoreContextMenuUntil = 0; suppressedClick = null; },
+    };
+  }
+
+  let rows = 8, cols = 8, mines = 10;
+  let game = new Minesweeper(rows, cols, mines);
+  let startTime = 0, seconds = 0, timer = null, pressed = false;
+  let openMenuButton = null, returnFocus = null, lastTouchTap = null;
+  let bestTimes = loadBestTimes();
+
+  function loadBestTimes() {
+    try { return JSON.parse(localStorage.getItem('lingyicute-minesweeper-best') || '{}') || {}; }
+    catch { return {}; }
+  }
+  function saveBestTimes() {
+    try { localStorage.setItem('lingyicute-minesweeper-best', JSON.stringify(bestTimes)); }
+    catch { /* Storage is optional for a file:// standalone copy. */ }
+  }
+  function paintCounter(node, value) {
+    node.innerHTML = counterMarkup(value);
+    node.setAttribute('aria-label', counterChars(value));
+  }
+  function paintFace() {
+    const state = game.state === 'lost' ? 'lost' : game.state === 'won' ? 'won' : pressed ? 'pressed' : 'smile';
+    faceButton.innerHTML = faceMarkup(state);
+  }
+  function finish() {
+    if (game.state !== 'won' && game.state !== 'lost') return;
+    clearInterval(timer);
+    timer = null;
+    if (game.state === 'won') {
+      const key = `${rows}x${cols}:${mines}`;
+      if (bestTimes[key] === undefined || seconds < bestTimes[key]) {
+        bestTimes[key] = seconds;
+        saveBestTimes();
+      }
+    }
+  }
+  function render() {
+    paintCounter(mineCounter, mines - game.flags);
+    paintCounter(timeCounter, seconds);
+    paintFace();
+    board.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
+    board.replaceChildren();
+    const lost = game.state === 'lost';
+    game.cells.forEach((cell, index) => {
+      const shown = lost && cell.mine && !cell.flagged ? { ...cell, revealed: true } : cell;
+      const wrong = lost && cell.flagged && !cell.mine;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `mine-cell${cellClass(shown, game.exploded === index, wrong)}`;
+      button.setAttribute('role', 'gridcell');
+      const rowNumber = Math.floor(index / cols) + 1;
+      const columnNumber = index % cols + 1;
+      const cellStatus = cell.flagged ? t('flagged') : cell.revealed
+        ? cell.mine ? t('mine') : `${cell.adjacent} ${cell.adjacent === 1 ? t('adjacentMineSingular') : t('adjacentMinePlural')}`
+        : t('covered');
+      button.setAttribute('aria-label', language === 'zh'
+        ? `第${rowNumber}行第${columnNumber}列，${cellStatus}`
+        : `Row ${rowNumber} column ${columnNumber}, ${cellStatus}`);
+      button.innerHTML = cellMarkup(shown, wrong);
+      button.addEventListener('click', event => {
+        if ((event.detail > 0 || event.pointerType === 'touch') && touchFlags.consumeClick(index)) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+        reveal(index);
+      });
+      button.addEventListener('contextmenu', event => {
+        event.preventDefault();
+        if (!touchFlags.contextMenu()) {
+          game.flag(index);
+          render();
+        }
+      });
+      button.addEventListener('auxclick', event => {
+        if (event.button === 1) {
+          event.preventDefault();
+          game.chord(index);
+          finish();
+          render();
+        }
+      });
+      button.addEventListener('dblclick', event => {
+        event.preventDefault();
+        game.chord(index);
+        finish();
+        render();
+      });
+      let touchStart = null;
+      button.addEventListener('pointerdown', event => {
+        if (event.button === 0) { pressed = true; paintFace(); }
+        touchFlags.pointerDown(index, event);
+        if (event.pointerType === 'touch') touchStart = { x: event.clientX, y: event.clientY, time: Date.now() };
+      });
+      button.addEventListener('pointerup', event => {
+        if (event.pointerType !== 'touch' || !touchStart) return;
+        const start = touchStart;
+        touchStart = null;
+        const elapsed = Date.now() - start.time;
+        if (elapsed > 250 || Math.abs(event.clientX - start.x) > 10 || Math.abs(event.clientY - start.y) > 10) return;
+        const now = Date.now();
+        if (lastTouchTap && lastTouchTap.index === index && now - lastTouchTap.time <= 500) {
+          lastTouchTap = null;
+          game.chord(index);
+          finish();
+          render();
+        } else {
+          lastTouchTap = { index, time: now };
+        }
+      });
+      button.addEventListener('pointercancel', () => { touchStart = null; });
+      board.append(button);
+    });
+  }
+  const touchFlags = createTouchFlagHandler(index => {
+    lastTouchTap = null;
+    game.flag(index);
+    render();
+  });
+  function reveal(index) {
+    const wasReady = game.state === 'ready';
+    const changed = game.reveal(index);
+    if (changed && wasReady && game.state === 'playing') {
+      startTime = Date.now();
+      timer = setInterval(() => {
+        seconds = Math.floor((Date.now() - startTime) / 1000);
+        paintCounter(timeCounter, seconds);
+      }, 500);
+    }
+    finish();
+    render();
+  }
+  function reset(nextRows = rows, nextCols = cols, nextMines = mines) {
+    touchFlags.cancel();
+    clearInterval(timer);
+    timer = null;
+    rows = nextRows; cols = nextCols; mines = nextMines;
+    game = new Minesweeper(rows, cols, mines);
+    startTime = 0; seconds = 0; pressed = false; lastTouchTap = null;
+    gameWindow.style.width = `${Math.max(212, cols * 20 + 46)}px`;
+    gameWindow.style.height = `${rows * 20 + 138}px`;
+    render();
+  }
+
+  function setLanguage(nextLanguage, repaint = true) {
+    language = nextLanguage === 'zh' ? 'zh' : 'en';
+    document.documentElement.dataset.language = language;
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+    document.title = t('pageTitle');
+    document.querySelector('meta[name="description"]').setAttribute('content', t('description'));
+    titleText.textContent = t('title');
+    desktop.setAttribute('aria-label', t('desktop'));
+    gameWindow.setAttribute('aria-label', t('window'));
+    menuBar.setAttribute('aria-label', t('menus'));
+    board.setAttribute('aria-label', t('board'));
+    faceButton.setAttribute('aria-label', t('newGame'));
+    faceButton.title = t('newGameTitle');
+    menuButtons.forEach(button => { button.textContent = t(button.dataset.menu); });
+    if (repaint) render();
+  }
+
+  function closeMenu() {
+    popupLayer.hidden = true;
+    popupLayer.replaceChildren();
+    if (openMenuButton) openMenuButton.setAttribute('aria-expanded', 'false');
+    openMenuButton = null;
+  }
+  function openMenu(menuButton, items) {
+    if (openMenuButton === menuButton) { closeMenu(); return; }
+    closeMenu();
+    const menu = document.createElement('div');
+    menu.className = 'popup-menu';
+    menu.setAttribute('role', 'menu');
+    for (const item of items) {
+      if (item.separator) {
+        const separator = document.createElement('div');
+        separator.className = 'menu-separator';
+        separator.setAttribute('role', 'separator');
+        menu.append(separator);
+        continue;
+      }
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'menu-item';
+      row.setAttribute('role', 'menuitem');
+      const check = document.createElement('span');
+      check.className = 'menu-check';
+      check.textContent = item.checked ? '✓' : '';
+      const label = document.createElement('span');
+      label.className = 'menu-label';
+      label.textContent = item.label;
+      row.append(check, label);
+      if (item.shortcut) {
+        const shortcut = document.createElement('span');
+        shortcut.className = 'menu-shortcut';
+        shortcut.textContent = item.shortcut;
+        row.append(shortcut);
+      }
+      row.disabled = !!item.disabled;
+      row.addEventListener('click', () => { closeMenu(); if (!item.disabled) item.action(); });
+      menu.append(row);
+    }
+    popupLayer.append(menu);
+    popupLayer.hidden = false;
+    openMenuButton = menuButton;
+    menuButton.setAttribute('aria-expanded', 'true');
+    const rect = menuButton.getBoundingClientRect();
+    const menuRect = menu.getBoundingClientRect();
+    menu.style.left = `${Math.max(0, Math.min(rect.left, innerWidth - menuRect.width))}px`;
+    menu.style.top = `${Math.max(0, Math.min(rect.bottom, innerHeight - menuRect.height))}px`;
+    menu.querySelector('.menu-item:not(:disabled)')?.focus();
+  }
+  function menuItems(name) {
+    if (name === 'game') return [
+      { label: t('new'), shortcut: 'F2', action: () => reset() },
+      { separator: true },
+      { label: t('beginner'), checked: rows === 8 && cols === 8 && mines === 10, action: () => reset(8, 8, 10) },
+      { label: t('intermediate'), checked: rows === 16 && cols === 16 && mines === 40, action: () => reset(16, 16, 40) },
+      { label: t('expert'), checked: rows === 20 && cols === 20 && mines === 80, action: () => reset(20, 20, 80) },
+      { label: t('custom'), action: showCustom },
+      { separator: true },
+      { label: t('bestTimes'), action: showBestTimes },
+    ];
+    if (name === 'language') return [
+      { label: 'English', checked: language === 'en', action: () => setLanguage('en') },
+      { label: '中文', checked: language === 'zh', action: () => setLanguage('zh') },
+    ];
+    return [
+      { label: t('howToPlay'), action: showHelp },
+      { label: t('about'), action: showAbout },
+    ];
+  }
+  menuButtons.forEach(button => button.addEventListener('click', () => openMenu(button, menuItems(button.dataset.menu))));
+  document.addEventListener('pointerdown', event => {
+    const insideMenuButton = menuButtons.some(button => button === event.target || button.contains(event.target));
+    if (!popupLayer.contains(event.target) && !insideMenuButton) closeMenu();
+  });
+
+  function closeDialog() {
+    dialogLayer.hidden = true;
+    dialogLayer.replaceChildren();
+    if (returnFocus && returnFocus.isConnected) returnFocus.focus();
+    returnFocus = null;
+  }
+  function openDialog(title, content, buttons, focusTarget = null) {
+    closeMenu();
+    returnFocus = document.activeElement;
+    const frame = document.createElement('section');
+    frame.className = 'dialog-window';
+    frame.setAttribute('role', 'dialog');
+    frame.setAttribute('aria-modal', 'true');
+    frame.setAttribute('aria-label', title);
+    const bar = document.createElement('div');
+    bar.className = 'dialog-title';
+    bar.textContent = title;
+    const body = document.createElement('div');
+    body.className = 'dialog-body';
+    body.append(content);
+    const footer = document.createElement('div');
+    footer.className = 'dialog-buttons';
+    for (const item of buttons) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = item.label;
+      if (item.default) button.classList.add('default-button');
+      button.addEventListener('click', item.action);
+      footer.append(button);
+    }
+    frame.append(bar, body, footer);
+    dialogLayer.replaceChildren(frame);
+    dialogLayer.hidden = false;
+    (focusTarget || footer.querySelector('.default-button') || footer.querySelector('button'))?.focus();
+  }
+  function showAbout() {
+    const content = document.createElement('div');
+    const brand = document.createElement('div');
+    brand.className = 'about-brand';
+    const icon = document.createElement('div');
+    icon.className = 'about-icon';
+    icon.innerHTML = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC0klEQVR4AcXBjXGaORhG0SucQtSJXneSTrh04nTyqJNQiZZvDLMY45/Y2dlzGl+UZCVhoza+aMcXJFljDKqKs8UX7fif7fif7bgjyUqyuCPJ4kYSThb3LWDxhgduJFljDHrvPD4++vT0dOAkyfr586djDI7HI713jscjvXeSoPL09CQgcODZOqG1RhKBAzcaV5IszsYYbOacXIwxmHMyxmDOyRiDOSebJFQVSVDZrLU4HA5sVM4aVx640nv39+/f9N45Ho/03um903un986ckzEGc07GGMw5uei9k4SqovdOVfH4+EhVoXLlwJXGDXVxUlVsxhhs5pyMMZhzMsZgzsm1JFQVSbhQudG4seOG2jgbY7CZczLGYM7JZs7JtSRUFUmoKjYqKlcad+x4wxiDzZyTMQZzTu5JQlWRhKoiCRsVFZX37LihrqpiM+dkjMGck3uSUFUkoapIQlWxUVFROVvcseOOMQZzTsYYzDm5loQkJKGqSEJVkYSqIgkbFRWV9zxwo6psrTHGYM7JtSRs9vs9VcWvX79Q6b1TVSThQkVF5YrAgSuNE3Vxtt/v2RwOB6qKJFQVSdjs93vmnGySoLJRuVBRUVFReUP7oa79fs/FnJMkVBVJqCqSUFUk4S0qKioqKioq71g/OJlzcpGEqiIJVUUSqookqLxHRUVFReWWyoVKA5bKRVWRhKoiCVVFEqqKJKh8REXlMxrPFmcqH1F5i4rKJ7XGS4sTlbeoqKjcUlH5QOPKjjtUNioblY2KiorKRmWjovKBxo3Ga4szFRUVFRUVFRUVFRWVT2jcaLy2uKKioqKioqKioqLyCY07GvctrqiofFPjjsZrS0XlP9C48cBLS6Wq6L2ThL9M4MCVHTeqiiSo/A0q72m8tnipAYs/03i2OFFROWncaNy3eNZ4afG+xmuLZ407Gl+3OFFROWv8oR3foPJdje9Z/KvxBf8ABES99gLxvAAAAAAASUVORK5CYII=" width="32" height="32" alt="" aria-hidden="true">';
+    const text = document.createElement('div');
+    const name = document.createElement('div');
+    name.className = 'about-name';
+    name.textContent = t('title');
+    const byline = document.createElement('div');
+    byline.className = 'about-byline';
+    byline.textContent = 'Proudly presented by lingyicute via her Win95 project.';
+    text.append(name, byline);
+    brand.append(icon, text);
+    content.append(brand);
+    openDialog(t('about'), content, [{ label: t('ok'), default: true, action: closeDialog }]);
+  }
+  function showHelp() {
+    const content = document.createElement('p');
+    content.className = 'dialog-copy';
+    content.textContent = t('helpText');
+    openDialog(t('howToPlay'), content, [{ label: t('ok'), default: true, action: closeDialog }]);
+  }
+  function showBestTimes() {
+    const content = document.createElement('p');
+    content.className = 'dialog-copy';
+    content.textContent = [
+      `${t('beginner')}${t('colon')} ${bestTimes['8x8:10'] ?? '—'} ${t('seconds')}`,
+      `${t('intermediate')}${t('colon')} ${bestTimes['16x16:40'] ?? '—'} ${t('seconds')}`,
+      `${t('expert')}${t('colon')} ${bestTimes['16x30:99'] ?? '—'} ${t('seconds')}`,
+    ].join('\n');
+    openDialog(t('bestTimesTitle'), content, [{ label: t('ok'), default: true, action: closeDialog }]);
+  }
+  function showCustom() {
+    const content = document.createElement('form');
+    const fields = document.createElement('div');
+    fields.className = 'form-grid';
+    const values = [
+      ['rows', t('rows'), rows, 8, 24],
+      ['columns', t('columns'), cols, 8, 30],
+      ['mines', t('mines'), mines, 1, 719],
+    ];
+    const inputs = [];
+    for (const [field, labelText, value, min, max] of values) {
+      const label = document.createElement('label');
+      label.textContent = `${labelText}${t('colon')}`;
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.min = String(min);
+      input.max = String(max);
+      input.step = '1';
+      input.value = String(value);
+      input.setAttribute('aria-label', labelText);
+      label.htmlFor = `custom-${field}`;
+      input.id = label.htmlFor;
+      inputs.push(input);
+      fields.append(label, input);
+    }
+    const error = document.createElement('div');
+    error.className = 'form-error';
+    error.setAttribute('aria-live', 'polite');
+    content.append(fields, error);
+    content.addEventListener('submit', event => {
+      event.preventDefault();
+      const [nextRows, nextCols, nextMines] = inputs.map(input => Number(input.value));
+      if (!Number.isInteger(nextRows) || nextRows < 8 || nextRows > 24
+        || !Number.isInteger(nextCols) || nextCols < 8 || nextCols > 30
+        || !Number.isInteger(nextMines) || nextMines < 1 || nextMines >= nextRows * nextCols) {
+        error.textContent = t('invalidCustom');
+        return;
+      }
+      closeDialog();
+      reset(nextRows, nextCols, nextMines);
+    });
+    openDialog(t('customField'), content, [
+      { label: t('ok'), default: true, action: () => content.requestSubmit() },
+      { label: t('cancel'), action: closeDialog },
+    ], inputs[0]);
+  }
+
+  function positionInitially() {
+    const width = Math.max(212, cols * 20 + 46);
+    const height = rows * 20 + 138;
+    gameWindow.style.left = `${Math.max(96, (innerWidth - width) / 2)}px`;
+    gameWindow.style.top = `${Math.max(25, (innerHeight - height) / 2)}px`;
+  }
+  function keepTitleVisible() {
+    const left = Number.parseFloat(gameWindow.style.left) || 0;
+    const top = Number.parseFloat(gameWindow.style.top) || 0;
+    gameWindow.style.left = `${Math.max(0, Math.min(left, innerWidth - 80))}px`;
+    gameWindow.style.top = `${Math.max(0, Math.min(top, innerHeight - 70))}px`;
+  }
+  let drag = null;
+  titleBar.addEventListener('pointerdown', event => {
+    if (event.button !== 0) return;
+    const rect = gameWindow.getBoundingClientRect();
+    drag = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, left: rect.left, top: rect.top };
+    titleBar.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  });
+  titleBar.addEventListener('pointermove', event => {
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const width = gameWindow.getBoundingClientRect().width;
+    const left = drag.left + event.clientX - drag.x;
+    const top = drag.top + event.clientY - drag.y;
+    gameWindow.style.left = `${Math.max(-width + 80, Math.min(innerWidth - 50, left))}px`;
+    gameWindow.style.top = `${Math.max(0, Math.min(innerHeight - 25, top))}px`;
+  });
+  const stopDragging = event => {
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    drag = null;
+    try { titleBar.releasePointerCapture(event.pointerId); } catch { /* capture may already be released */ }
+  };
+  titleBar.addEventListener('pointerup', stopDragging);
+  titleBar.addEventListener('pointercancel', stopDragging);
+
+  const releasePointer = event => {
+    touchFlags.pointerEnd(event.pointerId);
+    if (!pressed) return;
+    pressed = false;
+    paintFace();
+  };
+  window.addEventListener('pointerup', releasePointer);
+  window.addEventListener('pointercancel', releasePointer);
+  window.addEventListener('pointermove', event => touchFlags.pointerMove(event));
+  window.addEventListener('resize', keepTitleVisible);
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      if (!dialogLayer.hidden) closeDialog();
+      else closeMenu();
+      return;
+    }
+    if (event.key === 'F2' && dialogLayer.hidden) {
+      event.preventDefault();
+      reset();
+    }
+  });
+
+  faceButton.addEventListener('click', () => reset());
+  setLanguage(language, false);
+  positionInitially();
+  reset();
+})();
+</script>
+</body>
+</html>
