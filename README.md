@@ -2,7 +2,7 @@
 <br>
 <br>
 <p align="center">
-  <img src="./icon.png" alt="Win95-Minesweeper logo" width="240" />
+  <img src="./icon.png" alt="Win95-Minesweeper logo" width="120" />
 </p>
 <h1 align="center">Win95-Minesweeper</h1>
 <h3 align="center">Numbers never lie. Your guesses might.</h3>
