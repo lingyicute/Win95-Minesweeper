@@ -29,6 +29,7 @@
   --dark: #000;
   --title: #000080;
   --raised: inset -1px -1px #000, inset 1px 1px #fff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+  --window-edge: inset -1px -1px #000, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #fff;
   --sunken: inset -1px -1px #fff, inset 1px 1px #808080, inset -2px -2px #dfdfdf, inset 2px 2px #000;
   font-family: W95FA, 'WenQuanYi Bitmap Song 12px', Arial, sans-serif;
   font-size: 12px;
@@ -49,11 +50,12 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 212px;
+  width: 207px;
   height: 298px;
-  padding: 3px;
+  /* The padding is deliberately unequal: more on the right than on the other three sides, because the dark bevel reads thinner than the light one and that face colour keeps the right edge level with it. A child that has to fill the frame, the Minesweeper field for one, folds it into the size it computes instead. */
+  padding: 3px 3.5px 3px 3px;
   background: var(--face);
-  box-shadow: var(--raised);
+  box-shadow: var(--window-edge);
   overflow: visible;
   max-width: none;
   max-height: none;
@@ -178,7 +180,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   overflow: auto;
   padding: 3px;
   background: var(--face);
-  box-shadow: var(--raised);
+  box-shadow: var(--window-edge);
   pointer-events: auto;
 }
 .menu-item {
@@ -213,9 +215,9 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   flex-direction: column;
   width: min(360px, calc(100vw - 24px));
   max-height: calc(100vh - 24px);
-  padding: 3px;
+  padding: 3px 3.5px 3px 3px;
   background: var(--face);
-  box-shadow: var(--raised);
+  box-shadow: var(--window-edge);
 }
 .dialog-title { height: 19px; min-height: 19px; padding: 2px 4px; background: var(--title); color: #fff; font-weight: bold; }
 .dialog-body { min-height: 0; padding: 15px 13px 12px; line-height: 1.5; }
@@ -693,7 +695,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     rows = nextRows; cols = nextCols; mines = nextMines;
     game = new Minesweeper(rows, cols, mines);
     startTime = 0; seconds = 0; pressed = false; lastTouchTap = null;
-    gameWindow.style.width = `${Math.max(212, cols * 20 + 46)}px`;
+    gameWindow.style.width = `${cols * 20 + 47}px`;
     gameWindow.style.height = `${rows * 20 + 138}px`;
     render();
   }
@@ -910,7 +912,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   }
 
   function positionInitially() {
-    const width = Math.max(212, cols * 20 + 46);
+    const width = cols * 20 + 47;
     const height = rows * 20 + 138;
     gameWindow.style.left = `${Math.max(96, (innerWidth - width) / 2)}px`;
     gameWindow.style.top = `${Math.max(25, (innerHeight - height) / 2)}px`;
