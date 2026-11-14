@@ -709,7 +709,15 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     finish();
     render();
   }
+  function keepWindowOnScreen() {
+    const { width, height } = gameWindow.getBoundingClientRect();
+    const left = Number.parseFloat(gameWindow.style.left) || 0;
+    const top = Number.parseFloat(gameWindow.style.top) || 0;
+    gameWindow.style.left = `${Math.max(0, Math.min(left, innerWidth - width))}px`;
+    gameWindow.style.top = `${Math.max(0, Math.min(top, innerHeight - height))}px`;
+  }
   function reset(nextRows = rows, nextCols = cols, nextMines = mines) {
+    const resized = nextRows !== rows || nextCols !== cols;
     touchFlags.cancel();
     clearInterval(timer);
     timer = null;
@@ -718,6 +726,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     startTime = 0; seconds = 0; pressed = false; lastTouchTap = null;
     gameWindow.style.width = `${cols * 20 + 47}px`;
     gameWindow.style.height = `${rows * 20 + 138}px`;
+    if (resized) keepWindowOnScreen();
     render();
   }
 
