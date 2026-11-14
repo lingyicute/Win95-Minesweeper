@@ -898,6 +898,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   }
   function showCustom() {
     const content = document.createElement('form');
+    content.noValidate = true;
     const fields = document.createElement('div');
     fields.className = 'form-grid';
     const values = [
@@ -927,8 +928,10 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     content.append(fields, error);
     content.addEventListener('submit', event => {
       event.preventDefault();
-      const [nextRows, nextCols, nextMines] = inputs.map(input => Number(input.value));
-      if (!Number.isInteger(nextRows) || nextRows < 8 || nextRows > 24
+      const raw = inputs.map(input => input.value.trim());
+      const [nextRows, nextCols, nextMines] = raw.map(Number);
+      if (raw.some(v => v === '')
+        || !Number.isInteger(nextRows) || nextRows < 8 || nextRows > 24
         || !Number.isInteger(nextCols) || nextCols < 8 || nextCols > 30
         || !Number.isInteger(nextMines) || nextMines < 1 || nextMines >= nextRows * nextCols) {
         error.textContent = t('invalidCustom');
