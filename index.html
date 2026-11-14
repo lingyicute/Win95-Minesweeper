@@ -818,12 +818,14 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   function closeDialog() {
     dialogLayer.hidden = true;
     dialogLayer.replaceChildren();
+    gameWindow.inert = false;
     if (returnFocus && returnFocus.isConnected) returnFocus.focus();
     returnFocus = null;
   }
   function openDialog(title, content, buttons, focusTarget = null) {
     closeMenu();
     returnFocus = document.activeElement;
+    gameWindow.inert = true;
     const frame = document.createElement('section');
     frame.className = 'dialog-window';
     frame.setAttribute('role', 'dialog');
