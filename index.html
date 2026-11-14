@@ -892,7 +892,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     content.textContent = [
       `${t('beginner')}${t('colon')} ${bestTimes['8x8:10'] ?? '—'} ${t('seconds')}`,
       `${t('intermediate')}${t('colon')} ${bestTimes['16x16:40'] ?? '—'} ${t('seconds')}`,
-      `${t('expert')}${t('colon')} ${bestTimes['16x30:99'] ?? '—'} ${t('seconds')}`,
+      `${t('expert')}${t('colon')} ${bestTimes['20x20:80'] ?? '—'} ${t('seconds')}`,
     ].join('\n');
     openDialog(t('bestTimesTitle'), content, [{ label: t('ok'), default: true, action: closeDialog }]);
   }
