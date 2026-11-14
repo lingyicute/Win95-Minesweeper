@@ -615,6 +615,8 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     paintCounter(timeCounter, seconds);
     paintFace();
     board.style.gridTemplateColumns = `repeat(${cols}, 20px)`;
+    const focused = document.activeElement;
+    const focusedCell = focused && focused.parentNode === board ? Array.prototype.indexOf.call(board.children, focused) : -1;
     board.replaceChildren();
     const lost = game.state === 'lost';
     game.cells.forEach((cell, index) => {
@@ -687,6 +689,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
       button.addEventListener('pointercancel', () => { touchStart = null; });
       board.append(button);
     });
+    if (focusedCell >= 0) board.children[focusedCell]?.focus({ preventScroll: true });
   }
   const touchFlags = createTouchFlagHandler(index => {
     lastTouchTap = null;
