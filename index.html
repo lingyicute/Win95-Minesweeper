@@ -799,13 +799,16 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     menu.querySelector('.menu-item:not(:disabled)')?.focus();
   }
   function menuItems(name) {
+    const isBeginner = rows === 8 && cols === 8 && mines === 10;
+    const isIntermediate = rows === 16 && cols === 16 && mines === 40;
+    const isExpert = rows === 20 && cols === 20 && mines === 80;
     if (name === 'game') return [
       { label: t('new'), shortcut: 'F2', action: () => reset() },
       { separator: true },
-      { label: t('beginner'), checked: rows === 8 && cols === 8 && mines === 10, action: () => reset(8, 8, 10) },
-      { label: t('intermediate'), checked: rows === 16 && cols === 16 && mines === 40, action: () => reset(16, 16, 40) },
-      { label: t('expert'), checked: rows === 20 && cols === 20 && mines === 80, action: () => reset(20, 20, 80) },
-      { label: t('custom'), action: showCustom },
+      { label: t('beginner'), checked: isBeginner, action: () => reset(8, 8, 10) },
+      { label: t('intermediate'), checked: isIntermediate, action: () => reset(16, 16, 40) },
+      { label: t('expert'), checked: isExpert, action: () => reset(20, 20, 80) },
+      { label: t('custom'), checked: !isBeginner && !isIntermediate && !isExpert, action: showCustom },
       { separator: true },
       { label: t('bestTimes'), action: showBestTimes },
     ];
