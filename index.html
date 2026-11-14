@@ -759,6 +759,7 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
     const menu = document.createElement('div');
     menu.className = 'popup-menu';
     menu.setAttribute('role', 'menu');
+    const rowsList = [];
     for (const item of items) {
       if (item.separator) {
         const separator = document.createElement('div');
@@ -786,7 +787,26 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
       }
       row.disabled = !!item.disabled;
       row.addEventListener('click', () => { closeMenu(); if (!item.disabled) item.action(); });
+      row.addEventListener('keydown', event => {
+        const enabled = rowsList.filter(node => !node.disabled);
+        const currentIndex = enabled.indexOf(row);
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          if (!enabled.length) return;
+          const step = event.key === 'ArrowDown' ? 1 : -1;
+          enabled[(currentIndex + step + enabled.length) % enabled.length].focus();
+        } else if (event.key === 'Home' || event.key === 'End') {
+          event.preventDefault();
+          if (enabled.length) enabled[event.key === 'Home' ? 0 : enabled.length - 1].focus();
+        } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          event.preventDefault();
+          const idx = menuButtons.indexOf(menuButton);
+          const next = menuButtons[(idx + (event.key === 'ArrowRight' ? 1 : -1) + menuButtons.length) % menuButtons.length];
+          openMenu(next, menuItems(next.dataset.menu));
+        }
+      });
       menu.append(row);
+      rowsList.push(row);
     }
     popupLayer.append(menu);
     popupLayer.hidden = false;
