@@ -573,8 +573,14 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   let bestTimes = loadBestTimes();
 
   function loadBestTimes() {
-    try { return JSON.parse(localStorage.getItem('lingyicute-minesweeper-best') || '{}') || {}; }
-    catch { return {}; }
+    try {
+      const stored = JSON.parse(localStorage.getItem('lingyicute-minesweeper-best') || '{}');
+      const times = {};
+      if (stored && typeof stored === 'object' && !Array.isArray(stored)) {
+        for (const [key, value] of Object.entries(stored)) if (Number.isFinite(value) && value >= 0) times[key] = value;
+      }
+      return times;
+    } catch { return {}; }
   }
   function saveBestTimes() {
     try { localStorage.setItem('lingyicute-minesweeper-best', JSON.stringify(bestTimes)); }
