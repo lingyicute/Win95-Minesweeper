@@ -590,8 +590,12 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
   }
   function finish() {
     if (game.state !== 'won' && game.state !== 'lost') return;
-    clearInterval(timer);
-    timer = null;
+    if (timer !== null) {
+      /* Ticks can lag or be throttled in a background tab; settle the clock before it is shown or recorded. */
+      seconds = Math.floor((Date.now() - startTime) / 1000);
+      clearInterval(timer);
+      timer = null;
+    }
     if (game.state === 'won') {
       const key = `${rows}x${cols}:${mines}`;
       if (bestTimes[key] === undefined || seconds < bestTimes[key]) {
