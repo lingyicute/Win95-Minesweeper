@@ -913,6 +913,12 @@ input { border: 0; background: #fff; box-shadow: var(--sunken); padding: 4px; mi
       closeDialog();
       reset(nextRows, nextCols, nextMines);
     });
+    /* The OK button lives outside the form and three number fields block implicit submission, so Enter did nothing. */
+    content.addEventListener('keydown', event => {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+      content.requestSubmit();
+    });
     openDialog(t('customField'), content, [
       { label: t('ok'), default: true, action: () => content.requestSubmit() },
       { label: t('cancel'), action: closeDialog },
